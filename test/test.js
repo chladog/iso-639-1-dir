@@ -1,5 +1,5 @@
 import assert from 'assert';
-import ISO6391 from '../dist/index.js';
+import ISO6391 from '../dist/index.mjs';
 
 describe('getName()', function () {
   it('en', function () {
