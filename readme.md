@@ -25,12 +25,16 @@ yarn add iso-639-1-dir
 
 ```typescript
 import ISO6391 from 'iso-639-1-dir';
+
+const codes = ISO6391.getAllCodes();
 ```
 
 ### CommonJs
 
 ```typescript
 const ISO6391 = require('iso-639-1-dir');
+
+const codes = ISO6391.getAllCodes();
 ```
 
 ## Interfaces & Types
