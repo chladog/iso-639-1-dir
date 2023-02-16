@@ -3,7 +3,8 @@ import LANGUAGES_LIST, { Language, LanguageCode, LanguageDir, LanguageName, Lang
 
 export default class ISO6391 {
   /**
-   * Get the array of the language objects by the given codes
+   * Get the array of the language objects by the given codes.
+   * Invalid codes will be filtered out.
    */
   static getLanguages(codes: LanguageCode[]) {
     return Object.entries(LANGUAGES_LIST).filter(([code, lang]) => codes.includes(code.toLowerCase() as LanguageCode)).map(([code, lang]) => ({ code: code, ...lang }));
@@ -73,7 +74,7 @@ export default class ISO6391 {
   /**
    * Get all languages codes
    */
-  static getAllCodes() {
+  static getAllCodes(): LanguageCode[] {
     return Object.keys(LANGUAGES_LIST) as LanguageCode[];
   }
 

@@ -7,7 +7,7 @@
 [npm-url]: https://npmjs.org/package/iso-639-1-dir
 [download-url]: https://img.shields.io/npm/dt/iso-639-1-dir.svg?style=flat-square
 
-Simple interface for [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes and their **writing directions**. Typescript friendly.
+Simple interface for [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language their 2-letter codes, english names, native names and **writing directions**. Typescript friendly.
 
 ## Installation
 
@@ -64,52 +64,53 @@ interface Language {
 
 ```typescript
   /**
-   * Get the array of the language objects by the given codes
+   * Get the array of the language objects by the given codes.
+   * Invalid codes will be filtered out.
    */
-  static getLanguages(codes: LanguageCode[]): Language[]
+  getLanguages(codes: LanguageCode[]): Language[]
 
   /**
    * Get the language object by the given code
    */
-  static getLanguage(code: LanguageCode): Language
+  getLanguage(code: LanguageCode): Language | undefined
 
   /**
    * Get language english name by the code
    */
-  static getName(code: LanguageCode): LanguageName | undefined
+  getName(code: LanguageCode): LanguageName | undefined
 
   /**
    * Get language english name by the code
    */
-  static getDir(code: LanguageCode): LanguageDir | undefined
+  getDir(code: LanguageCode): LanguageDir | undefined
 
   /**
    * Get all languages english names
    */
-  static getAllNames(): LanguageName[]
+  getAllNames(): LanguageName[]
 
   /**
    * Get language native name by the code
    */
-  static getNativeName(code: LanguageCode): LanguageNativeName | undefined
+  getNativeName(code: LanguageCode): LanguageNativeName | undefined
 
   /**
    * Get all languages native names
    */
-  static getAllNativeNames(): LanguageNativeName[]
+  getAllNativeNames(): LanguageNativeName[]
 
   /**
    * Get code of a language by english name or native name
    */
-  static getCode(name: string): LanguageCode | undefined
+  getCode(name: string): LanguageCode | undefined
 
   /**
    * Get all languages codes
    */
-  static getAllCodes(): LanguageCode[]
+  getAllCodes(): LanguageCode[]
 
   /**
   * Validate if language exists by the code
   */
-  static validate(code: string): code is LanguageCode
+  validate(code: string): code is LanguageCode
 ```
