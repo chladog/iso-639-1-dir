@@ -1,121 +1,115 @@
-# ISO-639-1
+# ISO-639-1-dir
+
 [![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
 [![Download Count][download-url]][npm-url]
 
-[travis-image]: https://travis-ci.org/meikidd/iso-639-1.svg?branch=master
-[travis-url]: https://travis-ci.org/meikidd/iso-639-1
-[npm-image]: https://img.shields.io/npm/v/iso-639-1.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/iso-639-1
-[download-url]: https://img.shields.io/npm/dt/iso-639-1.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/iso-639-1-dir.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/iso-639-1-dir
+[download-url]: https://img.shields.io/npm/dt/iso-639-1-dir.svg?style=flat-square
 
-
-Simple interface for [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes
+Simple interface for [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes and their **writing directions**. Typescript friendly.
 
 ## Installation
 
 ```
-npm install iso-639-1
+npm install iso-639-1-dir
+```
+
+```
+yarn add iso-639-1-dir
 ```
 
 ## Usage
 
-### Node.js
-
-```javascript
-const ISO6391 = require('iso-639-1');
-console.log(ISO6391.getName('en')); // 'English'
-```
-
 ### ES Module
 
-```javascript
-import ISO6391 from 'iso-639-1';
-console.log(ISO6391.getName('en')); // 'English'
+```typescript
+import ISO6391 from 'iso-639-1-dir';
 ```
 
-### Browsers
+### CommonJs
 
-HTML
-
-```html
-<script type="text/javascript" src="./node_modules/iso-639-1/build/index.js"></script>
+```typescript
+const ISO6391 = require('iso-639-1-dir');
 ```
 
-Visit global variable ISO6391 in js
+## Interfaces & Types
 
-```javascript
-console.log(ISO6391.getName('en')); // 'English'
+Codes list: [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+
+```typescript
+
+type LanguageCode = "aa" | "ab" | "ae" | "af" | "ak" | "am" | "an" | "ar" | "as" | "av" | "ay" | "az" | "ba" | "be" | "bg" | "bi" | "bm" | "bn" | "bo" | "br" | "bs" | "ca" | "ce" | "ch" | "co" | "cr" | "cs" | ... 155 more ... | "zu"
+
+type LanguageName = "Afar" | "Abkhaz" | "Avestan" | "Afrikaans" | "Akan" | "Amharic" | "Aragonese" | "Arabic" | "Assamese" | "Avaric" | "Aymara" | "Azerbaijani" | "Bashkir" | "Belarusian" | "Bulgarian" | ... 167 more ... | "Zulu"
+
+type LanguageNativeName = "Afaraf" | "аҧсуа бызшәа" | "avesta" | "Afrikaans" | "Akan" | "አማርኛ" | "aragonés" | "اَلْعَرَبِيَّةُ" | "অসমীয়া" | "авар мацӀ" | "aymar aru" | "azərbaycan dili" | "башҡорт теле" | ... 168 more ... | "isiZulu"
+
+/**
+ * ltr - left to right
+ * rtl - right to left
+ * ttb - top to bottom
+ */
+type LanguageDir = 'ltr' | 'rtl' | 'ttb';
+
+interface Language {
+  name: LanguageName;
+  nativeName: LanguageNativeName;
+  dir: LanguageDir;
+  code: LanguageCode;
+}
 ```
 
 ## Methods
 
-### getName(code)
-  - @param code {string}
-  - @return {string}
+```typescript
+  /**
+   * Get the array of the language objects by the given codes
+   */
+  static getLanguages(codes: LanguageCode[]): Language[]
 
-Lookup language english name by code
+  /**
+   * Get the language object by the given code
+   */
+  static getLanguage(code: LanguageCode): Language
 
-### getAllNames()
-  - @return {array}
+  /**
+   * Get language english name by the code
+   */
+  static getName(code: LanguageCode): LanguageName | undefined
 
-Get array of all language english names
+  /**
+   * Get language english name by the code
+   */
+  static getDir(code: LanguageCode): LanguageDir | undefined
 
-### getNativeName(code)
-  - @param code {string}
-  - @return {string}
+  /**
+   * Get all languages english names
+   */
+  static getAllNames(): LanguageName[]
 
-Lookup language native name by code
+  /**
+   * Get language native name by the code
+   */
+  static getNativeName(code: LanguageCode): LanguageNativeName | undefined
 
-### getAllNativeNames()
-  - @return {array}
+  /**
+   * Get all languages native names
+   */
+  static getAllNativeNames(): LanguageNativeName[]
 
-Get array of all language native names
+  /**
+   * Get code of a language by english name or native name
+   */
+  static getCode(name: string): LanguageCode | undefined
 
+  /**
+   * Get all languages codes
+   */
+  static getAllCodes(): LanguageCode[]
 
-### getCode(name)
-  - @param name {string}
-  - @return {string}
-
-Lookup code by english name or native name
-
-### getAllCodes()
-  - @return {array}
-
-Get array of all codes
-
-### validate(code)
-  - @param code {string}
-  - @return {boolean}
-
-Check whether the given code is in the list of [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-
-### getLanguages(codes)
-  - @param codes {array}
-  - @return {array}
-
-Get the array of the language objects by the given codes
-
-## Example
-
-```
-const ISO6391 = require('iso-639-1')
-
-console.log(ISO6391.getName('zh')) // 'Chinese'
-console.log(ISO6391.getNativeName('zh')) // '中文'
-
-console.log(ISO6391.getAllNames()) // ['Afar','Abkhaz', ... ,'Zulu']
-console.log(ISO6391.getAllNativeNames()) //['Afaraf','аҧсуа бызшәа', ... ,'isiZulu' ]
-
-console.log(ISO6391.getCode('Chinese')) // 'zh'
-console.log(ISO6391.getCode('中文')) // 'zh'
-
-console.log(ISO6391.getAllCodes()) //['aa','ab',...,'zu']
-
-console.log(ISO6391.validate('en')) // true
-console.log(ISO6391.validate('xx')) // false
-
-console.log(ISO6391.getLanguages(['en', 'zh']))
-// [{code:'en',name:'English',nativeName:'English'},{code:'zh',name:'Chinese',nativeName:'中文'}]
-
+  /**
+  * Validate if language exists by the code
+  */
+  static validate(code: string): code is LanguageCode
 ```

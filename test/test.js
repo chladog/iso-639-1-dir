@@ -1,71 +1,71 @@
-const assert = require('assert');
-const ISO6391 = require('../build/index');
+import assert from 'assert';
+import ISO6391 from '../dist/index.js';
 
-describe('getName()', function() {
-  it('en', function() {
+describe('getName()', function () {
+  it('en', function () {
     assert.equal(ISO6391.getName('en'), 'English');
   });
-  it('zh', function() {
+  it('zh', function () {
     assert.equal(ISO6391.getName('zh'), 'Chinese');
   });
-  it('xx', function() {
+  it('xx', function () {
     assert.equal(ISO6391.getName('xx'), '');
   });
-  it('toString', function() {
+  it('toString', function () {
     assert.equal(ISO6391.getName('toString'), '');
   });
 });
 
-describe('getNativeName()', function() {
-  it('en', function() {
+describe('getNativeName()', function () {
+  it('en', function () {
     assert.equal(ISO6391.getNativeName('en'), 'English');
   });
-  it('zh', function() {
+  it('zh', function () {
     assert.equal(ISO6391.getNativeName('zh'), '中文');
   });
-  it('xx', function() {
+  it('xx', function () {
     assert.equal(ISO6391.getNativeName('xx'), '');
   });
-  it('toString', function() {
+  it('toString', function () {
     assert.equal(ISO6391.getNativeName('toString'), '');
   });
 });
 
-describe('getCode()', function() {
-  it('English', function() {
+describe('getCode()', function () {
+  it('English', function () {
     assert.equal(ISO6391.getCode('English'), 'en');
   });
-  it('Chinese', function() {
+  it('Chinese', function () {
     assert.equal(ISO6391.getCode('Chinese'), 'zh');
   });
-  it('中文', function() {
+  it('中文', function () {
     assert.equal(ISO6391.getCode('中文'), 'zh');
   });
-  it('xx', function() {
+  it('xx', function () {
     assert.equal(ISO6391.getCode('xx'), '');
   });
-  it('toString', function() {
+  it('toString', function () {
     assert.equal(ISO6391.getCode('toString'), '');
   });
 });
 
-describe('validate()', function() {
-  it('en', function() {
+describe('validate()', function () {
+  it('en', function () {
     assert.equal(ISO6391.validate('en'), true);
   });
-  it('zh', function() {
+  it('zh', function () {
     assert.equal(ISO6391.validate('zh'), true);
   });
-  it('xx', function() {
+  it('xx', function () {
     assert.equal(ISO6391.validate('xx'), false);
   });
-  it('toString', function() {
+  it('toString', function () {
     assert.equal(ISO6391.validate('toString'), false);
   });
 });
 
-describe('getLanguages()', function() {
-  it('[en, zh, xx, toString]', function() {
+describe('getLanguages()', function () {
+  it('[en, zh, xx, toString]', function () {
     assert.deepEqual(ISO6391.getLanguages(['en', 'zh', 'xx', 'toString']), [
       {
         code: 'en',
