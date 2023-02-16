@@ -9,10 +9,10 @@ describe('getName()', function () {
     assert.equal(ISO6391.getName('zh'), 'Chinese');
   });
   it('xx', function () {
-    assert.equal(ISO6391.getName('xx'), '');
+    assert.equal(ISO6391.getName('xx'), undefined);
   });
   it('toString', function () {
-    assert.equal(ISO6391.getName('toString'), '');
+    assert.equal(ISO6391.getName('toString'), undefined);
   });
 });
 
@@ -24,10 +24,10 @@ describe('getNativeName()', function () {
     assert.equal(ISO6391.getNativeName('zh'), '中文');
   });
   it('xx', function () {
-    assert.equal(ISO6391.getNativeName('xx'), '');
+    assert.equal(ISO6391.getNativeName('xx'), undefined);
   });
   it('toString', function () {
-    assert.equal(ISO6391.getNativeName('toString'), '');
+    assert.equal(ISO6391.getNativeName('toString'), undefined);
   });
 });
 
@@ -42,10 +42,10 @@ describe('getCode()', function () {
     assert.equal(ISO6391.getCode('中文'), 'zh');
   });
   it('xx', function () {
-    assert.equal(ISO6391.getCode('xx'), '');
+    assert.equal(ISO6391.getCode('xx'), undefined);
   });
   it('toString', function () {
-    assert.equal(ISO6391.getCode('toString'), '');
+    assert.equal(ISO6391.getCode('toString'), undefined);
   });
 });
 
@@ -64,6 +64,24 @@ describe('validate()', function () {
   });
 });
 
+describe('getDir()', function () {
+  it('English', function () {
+    assert.equal(ISO6391.getDir('en'), 'ltr');
+  });
+  it('Chinese', function () {
+    assert.equal(ISO6391.getDir('zh'), 'ttb');
+  });
+  it('Arabic', function () {
+    assert.equal(ISO6391.getDir('ar'), 'rtl');
+  });
+  it('xx', function () {
+    assert.equal(ISO6391.getDir('xx'), undefined);
+  });
+  it('Czech', function () {
+    assert.equal(ISO6391.getDir('cs'), 'ltr');
+  });
+});
+
 describe('getLanguages()', function () {
   it('[en, zh, xx, toString]', function () {
     assert.deepEqual(ISO6391.getLanguages(['en', 'zh', 'xx', 'toString']), [
@@ -71,22 +89,14 @@ describe('getLanguages()', function () {
         code: 'en',
         name: 'English',
         nativeName: 'English',
+        dir: 'ltr'
       },
       {
         code: 'zh',
         name: 'Chinese',
         nativeName: '中文',
-      },
-      {
-        code: 'xx',
-        name: '',
-        nativeName: '',
-      },
-      {
-        code: 'toString',
-        name: '',
-        nativeName: '',
-      },
+        dir: 'ttb'
+      }
     ]);
   });
 });

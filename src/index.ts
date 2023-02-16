@@ -59,15 +59,15 @@ export default class ISO6391 {
   /**
    * Get code of a language by english name or native name
    */
-  static getCode(name: string) {
+  static getCode(name: string): LanguageCode | undefined {
     name = name.toLowerCase();
-    const code = Object.entries(LANGUAGES_LIST).find(([code, language]) => {
+    const code = Object.entries(LANGUAGES_LIST)?.find(([code, language]) => {
       return (
         language.name.toLowerCase() === name ||
         language.nativeName.toLowerCase() === name
       );
-    });
-    return code || '';
+    })?.[0] as LanguageCode;
+    return code;
   }
 
   /**
