@@ -80,7 +80,7 @@ interface Language {
   getName(code: LanguageCode): LanguageName | undefined
 
   /**
-   * Get language english name by the code
+   * Get language writing direction by the code
    */
   getDir(code: LanguageCode): LanguageDir | undefined
 
