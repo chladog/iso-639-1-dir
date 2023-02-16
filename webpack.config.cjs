@@ -19,7 +19,7 @@ let webpackConfig = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: "index.js",
+    filename: "index.mjs",
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     library: {
