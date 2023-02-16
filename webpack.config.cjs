@@ -18,15 +18,27 @@ let webpackConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  output: {
-    filename: "index.mjs",
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    library: {
-      type: "module",
-    },
-  },
-
 };
 
-module.exports = webpackConfig;
+module.exports = [{
+  ...webpackConfig, ...{
+    output: {
+      filename: "index.mjs",
+      path: path.resolve(__dirname, 'dist'),
+      clean: true,
+      library: {
+        type: "module",
+      },
+    },
+  }
+}, {
+  ...webpackConfig, ... {
+    output: {
+      filename: "index.cjs",
+      path: path.resolve(__dirname, 'dist'),
+      library: {
+        type: "commonjs",
+      },
+    },
+  }
+}];
