@@ -10,7 +10,7 @@ export default class ISO6391 {
     if (Array.isArray(codes)) {
       return Object.entries({ ...LANGUAGES_LIST }).filter(([code, lang]) => codes.includes(code.toLowerCase() as LanguageCode)).map(([code, lang]) => ({ code: code, ...lang }));
     } else {
-      return Object.entries({ ...LANGUAGES_LIST });
+      return Object.entries({ ...LANGUAGES_LIST }).map(([code, lang]) => ({ code: code, ...lang }));
     }
   }
 
