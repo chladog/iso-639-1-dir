@@ -1,13 +1,30 @@
 
-import LANGUAGES_LIST, { Language, LanguageCode, LanguageDir, LanguageName, LanguageNativeName } from './data';
+import LANGUAGES_LIST, { LanguageCode, LanguageDir, LanguageName, LanguageNativeName } from './data';
 
 export default class ISO6391 {
   /**
-   * Get the array of the language objects by the given codes.
+   * Get the array of the language objects by the given code, or all langages if no array passed.
    * Invalid codes will be filtered out.
    */
-  static getLanguages(codes: LanguageCode[]) {
-    return Object.entries(LANGUAGES_LIST).filter(([code, lang]) => codes.includes(code.toLowerCase() as LanguageCode)).map(([code, lang]) => ({ code: code, ...lang }));
+  static getLanguages(codes?: LanguageCode[]) {
+    if (Array.isArray(codes)) {
+      return Object.entries({ ...LANGUAGES_LIST }).filter(([code, lang]) => codes.includes(code.toLowerCase() as LanguageCode)).map(([code, lang]) => ({ code: code, ...lang }));
+    } else {
+      return Object.entries({ ...LANGUAGES_LIST });
+    }
+  }
+
+  /**
+   * Get the object of the language objects by the given code, or all langages if no array passed.
+   * Invalid codes will be filtered out.
+   */
+  static getLanguagesObj(codes?: LanguageCode[]) {
+    if (Array.isArray(codes)) {
+      const src = { ...LANGUAGES_LIST };
+      return filterObject(src, (([key]) => codes.includes(key.toLowerCase() as LanguageCode)));
+    } else {
+      return { ...LANGUAGES_LIST };
+    }
   }
 
   /**
@@ -39,7 +56,7 @@ export default class ISO6391 {
    * Get all languages english names
    */
   static getAllNames(): LanguageName[] {
-    return Object.values(LANGUAGES_LIST).map(l => l.name);
+    return Object.values({ ...LANGUAGES_LIST }).map(l => l.name);
   }
 
   /**
@@ -54,7 +71,7 @@ export default class ISO6391 {
    * Get all languages native names
    */
   static getAllNativeNames() {
-    return Object.values(LANGUAGES_LIST).map(l => l.nativeName);
+    return Object.values({ ...LANGUAGES_LIST }).map(l => l.nativeName);
   }
 
   /**
@@ -62,7 +79,7 @@ export default class ISO6391 {
    */
   static getCode(name: string): LanguageCode | undefined {
     name = name.toLowerCase();
-    const code = Object.entries(LANGUAGES_LIST)?.find(([code, language]) => {
+    const code = Object.entries({ ...LANGUAGES_LIST })?.find(([code, language]) => {
       return (
         language.name.toLowerCase() === name ||
         language.nativeName.toLowerCase() === name
@@ -75,7 +92,7 @@ export default class ISO6391 {
    * Get all languages codes
    */
   static getAllCodes(): LanguageCode[] {
-    return Object.keys(LANGUAGES_LIST) as LanguageCode[];
+    return Object.keys({ ...LANGUAGES_LIST }) as LanguageCode[];
   }
 
   /**
@@ -83,6 +100,20 @@ export default class ISO6391 {
   */
   static validate(code: string): code is LanguageCode {
     code = code.toLowerCase();
-    return LANGUAGES_LIST.hasOwnProperty(code);
+    return { ...LANGUAGES_LIST }.hasOwnProperty(code);
   }
+}
+
+
+type Entry<T> = {
+  [K in keyof T]: [K, T[K]]
+}[keyof T]
+
+function filterObject<T extends object>(
+  obj: T,
+  fn: (entry: Entry<T>, i: number, arr: Entry<T>[]) => boolean
+) {
+  return Object.fromEntries(
+    (Object.entries(obj) as Entry<T>[]).filter(fn)
+  ) as Partial<T>
 }

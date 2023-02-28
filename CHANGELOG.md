@@ -1,5 +1,9 @@
 # iso-639-1 Changelog
 
+## v3.0.4
+- ```getLanguages(codes?: LanguageCode[])``` method now returns all languages if no ```codes``` parameter passed to it.
+- new ```getLanguagesObj(codes?: LanguageCode[])``` method that returns an **object** in format ```{[key: LanguageCode]: Language}```. This is convenient method should you prefer object to array of languages.
+
 ## v2.1.15
 - Change parameters type "LanguageCode" to "string"
 ## v2.1.14
