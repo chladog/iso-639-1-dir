@@ -1,6 +1,6 @@
 {
   "name": "iso-639-1-dir",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "ESM of ISO-639-1 language codes, english names, native names and writing directions. TS-friendly.",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
